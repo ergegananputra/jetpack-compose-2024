@@ -65,4 +65,8 @@ dependencies {
     implementation(libs.kotlinx.serialization.json) //org.jetbrains.kotlinx:kotlinx-serialization-json
     implementation(kotlin("reflect"))
 
+    // [Coil](https://github.com/coil-kt/coil)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp) // only if you want to use Coil OkHttp (optional)
+
 }

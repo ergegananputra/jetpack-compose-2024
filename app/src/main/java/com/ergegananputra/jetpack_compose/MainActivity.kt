@@ -23,13 +23,8 @@ class MainActivity : ComponentActivity() {
             JetpackCompose2024Theme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    topBar = {
-                        eTopAppBar()
-                    },
-                    bottomBar = {
-                        BottomNavigation(mainNavController)
-                    }
-
+                    topBar = { eTopAppBar() },
+                    bottomBar = { BottomNavigation(mainNavController) }
                 ) { innerPadding ->
                     MainGraph.NavHost(
                         navController = mainNavController,

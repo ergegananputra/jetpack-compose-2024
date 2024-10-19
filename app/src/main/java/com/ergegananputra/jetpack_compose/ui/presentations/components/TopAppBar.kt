@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter.Companion.tint
@@ -21,8 +20,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.rememberAsyncImagePainter
 import com.ergegananputra.jetpack_compose.R
 import com.ergegananputra.jetpack_compose.ui.theme.JetpackCompose2024Theme
+import com.ergegananputra.jetpack_compose.utils.StringCheckerUtils
 
 @Preview(
     name = "Light Mode",
@@ -42,9 +43,15 @@ fun TopAppBar(
     modifier: Modifier = Modifier,
     notchHeight : Dp = 24.dp,
     title: String = stringResource(id = R.string.app_name),
+    leadIconUrl : String = "https://avatars.githubusercontent.com/u/126530940?v=4",
     trailingIcon : @Composable () -> Unit = {}
-
 ) {
+    val leadIconPainter = if (StringCheckerUtils(leadIconUrl).isHttpUrl()) {
+        rememberAsyncImagePainter(leadIconUrl)
+    } else {
+        painterResource(id = R.drawable.ic_launcher_foreground)
+    }
+
     Surface(
         color = MaterialTheme.colorScheme.surface,
         contentColor = MaterialTheme.colorScheme.primary,
@@ -69,9 +76,8 @@ fun TopAppBar(
                     .width(48.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                    contentDescription = "DI Logo",
-                    colorFilter = tint(MaterialTheme.colorScheme.primary),
+                    painter = leadIconPainter,
+                    contentDescription = "Lead Icon Logo",
                     modifier = Modifier
                         .padding(15.dp)
                 )
