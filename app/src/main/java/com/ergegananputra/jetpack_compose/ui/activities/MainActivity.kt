@@ -12,20 +12,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.ergegananputra.jetpack_compose.ui.presentations.components.BottomNavigation
 import com.ergegananputra.jetpack_compose.ui.navigations.graph.MainGraph
+import com.ergegananputra.jetpack_compose.ui.presentations.dashboard.DashboardViewModel
 import com.ergegananputra.jetpack_compose.ui.theme.JetpackCompose2024Theme
+import dagger.hilt.android.AndroidEntryPoint
 import com.ergegananputra.jetpack_compose.ui.presentations.components.TopAppBar as eTopAppBar
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             val viewModelPacks = MainActivityViewModelPacks(
-                dashboardViewModel = viewModel()
+                dashboardViewModel = hiltViewModel<DashboardViewModel>()
             )
             val mainNavController = rememberNavController()
             JetpackCompose2024Theme {

@@ -5,6 +5,15 @@ plugins {
 
     // Navigation
     alias(libs.plugins.kotlin.serialization)
+
+    // Room
+    alias(libs.plugins.androidx.room)
+
+    // Hilt
+    alias(libs.plugins.dagger.hilt.android)
+
+    // KSP
+    alias(libs.plugins.devtools.ksp)
 }
 
 android {
@@ -40,6 +49,10 @@ android {
     buildFeatures {
         compose = true
     }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -68,5 +81,26 @@ dependencies {
     // [Coil](https://github.com/coil-kt/coil)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp) // only if you want to use Coil OkHttp (optional)
+
+    // Kotlin Coroutines
+    implementation(libs.kotlinx.coroutines.core)
+
+    // Hilt
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.dagger.hilt.android)
+    ksp(libs.dagger.hilt.android.compiler)
+    ksp(libs.dagger.hilt.compiler)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    testImplementation(libs.androidx.room.testing)
+    implementation(libs.androidx.room.paging)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
 }
