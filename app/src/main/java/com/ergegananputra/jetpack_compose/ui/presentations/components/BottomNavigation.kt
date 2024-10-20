@@ -1,4 +1,4 @@
-package com.ergegananputra.jetpack_compose.ui.navigations
+package com.ergegananputra.jetpack_compose.ui.presentations.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
