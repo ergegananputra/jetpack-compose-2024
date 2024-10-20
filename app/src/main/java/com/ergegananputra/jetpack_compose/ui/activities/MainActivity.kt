@@ -18,20 +18,25 @@ import androidx.navigation.compose.rememberNavController
 import com.ergegananputra.jetpack_compose.ui.presentations.components.BottomNavigation
 import com.ergegananputra.jetpack_compose.ui.navigations.graph.MainGraph
 import com.ergegananputra.jetpack_compose.ui.presentations.dashboard.DashboardViewModel
+import com.ergegananputra.jetpack_compose.ui.presentations.sensor.SensorViewModel
 import com.ergegananputra.jetpack_compose.ui.theme.JetpackCompose2024Theme
 import dagger.hilt.android.AndroidEntryPoint
 import com.ergegananputra.jetpack_compose.ui.presentations.components.TopAppBar as eTopAppBar
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val viewModelPacks = MainActivityViewModelPacks(
-                dashboardViewModel = hiltViewModel<DashboardViewModel>()
-            )
             val mainNavController = rememberNavController()
+            val viewModelPacks = MainActivityViewModelPacks(
+                dashboardViewModel = hiltViewModel<DashboardViewModel>(),
+                sensorViewModel = viewModel {
+                    SensorViewModel()
+                }
+            )
             JetpackCompose2024Theme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
@@ -58,11 +63,16 @@ class MainActivity : ComponentActivity() {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
                 webUriLauncher.launch(intent)
             }
+            is MainGraph.MotionSensor -> {
+                val intentToMotionSensorActivity = Intent(this, MotionSensorActivity::class.java)
+                activitySensorLauncher.launch(intentToMotionSensorActivity)
+            }
             else -> {
                 // Handle other actions
             }
         }
     }
+
 
     /**
      * Launch Web URI
@@ -72,5 +82,15 @@ class MainActivity : ComponentActivity() {
             Log.d(this::class.simpleName, "Web URI Launched")
         }
 
+    private val activitySensorLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                Log.d(this::class.simpleName, "Sensor Activity Launched")
+            } else {
+                Log.d(this::class.simpleName, "Sensor Activity Cancelled")
+            }
+        }
+
 }
+
 

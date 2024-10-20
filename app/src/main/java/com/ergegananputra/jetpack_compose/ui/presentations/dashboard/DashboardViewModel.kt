@@ -1,5 +1,6 @@
 package com.ergegananputra.jetpack_compose.ui.presentations.dashboard
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ergegananputra.jetpack_compose.domain.repository.PhotosRepository
@@ -41,6 +42,7 @@ class DashboardViewModel @Inject constructor(
 
     fun fetchPhotos() {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d("DashboardViewModel", "fetchPhotos")
             photosRepository.fetchPhotos(1, 10)
         }
     }

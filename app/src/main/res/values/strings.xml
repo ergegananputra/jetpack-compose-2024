@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Jetpack Compose 2024</string>
+    <string name="title_activity_sensor">SensorActivity</string>
 </resources>

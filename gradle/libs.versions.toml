@@ -18,6 +18,7 @@ hilt = "2.52"
 hiltNavigationCompose = "1.2.0"
 retrofit = "2.11.0"
 converterGson = "2.11.0"
+playServicesLocation = "21.3.0"
 
 [libraries]
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
@@ -50,6 +51,7 @@ dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compil
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

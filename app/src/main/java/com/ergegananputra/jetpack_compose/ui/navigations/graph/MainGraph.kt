@@ -17,6 +17,8 @@ sealed class MainGraph {
     @Serializable
     data object Sensor : MainGraph()
 
+    data object MotionSensor : MainGraph()
+
     data class ImplicitIntent(val uri: String) : MainGraph()
 
     companion object {
@@ -39,7 +41,11 @@ sealed class MainGraph {
                     )
                 }
                 composable<Sensor> {
-                    SensorScreen(modifier = modifier)
+                    SensorScreen(
+                        mainEventHandler = eventHandler,
+                        viewModel = viewModelPacks.sensorViewModel,
+                        modifier = modifier
+                    )
                 }
             }
         }
